@@ -1,3 +1,7 @@
 @import "theme";
 @import "bootstrap";
 @import "books";
+
+.field_with_errors .form-control {
+  border: 1px solid $red;
+ }

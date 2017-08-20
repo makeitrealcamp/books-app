@@ -5,6 +5,16 @@
         <div class="card-header font-weight-bold"><%= title %></div>
         <%= form_for @book do |f| %>
         <div class="card-body">
+          <% if @book.errors.any? %>
+            <div id="card border-0">
+              <p>This form contains <%= pluralize(@book.errors.count, "error") %>:</p>
+              <ul>
+              <% @book.errors.full_messages.each do |msg| %>
+                <li class="text-danger"><%= msg %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
           <div class="form-group">
             <%= f.label :title %>
             <%= f.text_field :title, class: "form-control", autofocus: true %>
