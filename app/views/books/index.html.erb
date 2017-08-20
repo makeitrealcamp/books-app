@@ -1,28 +1,23 @@
-<h1>Libros</h1>
-<%= link_to "Nuevo Libro", new_book_path %>
-<table border="1">
-  <thead>
-    <tr>
-      <th>Título</th>
-      <th>Descripción</th>
-      <th>Fecha de Publicación</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
+<div class="books-page">
+  <div class="container">
+    <div class="text-right"><%= link_to "Agregar Libro", new_book_path, class: "btn btn-primary rounded-0" %></div>
+
     <% @books.each do |book| %>
-      <tr>
-        <td><%= book.title %></td>
-        <td><%= book.description %></td>
-        <td><%= book.publication_date %></td>
-        <td>
-          <%= link_to "Mostrar", book %>
+      <div class="book card flex-sm-row align-items-center align-items-sm-start mt-5">
+        <img src="<%= book.image_url %>" alt="<%= book.title %>">
+        <div class="card-body">
+          <h5 class="card-title">
+            <%= book.title %>
+            <small><%= book.author %></small>
+          </h5>
+          <p class="card-text"><%= book.description %></p>
+          <%= link_to "Detalles", book, class: "btn btn-primary" %>
           <% if signed_in? %>
-            <%= link_to "Editar", edit_book_path(book) %>
-            <%= link_to "Eliminar", book, method: :delete, data: { confirm: "¿Estás seguro de eliminar este libro?" } %>
+            <%= link_to "Editar", edit_book_path(book), class: "btn btn-link" %>
+            <%= link_to "Eliminar", book, class: "btn btn-link text-danger", method: :delete, data: { confirm: "¿Estás seguro de eliminar este libro?" } %>
           <% end %>
-        </td>
-      </tr>
+        </div>
+      </div>
     <% end %>
-  </tbody>
-</table>
+  </div>
+</div>

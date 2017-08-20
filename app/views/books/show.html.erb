@@ -1,6 +1,29 @@
-<h1>Detalles del Libro</h1>
-<div>Nombre: <%= @book.title %></div>
-<div>Autor: <%= @book.author %></div>
-<div>Descripción: <%= @book.description %></div>
-<div>Fecha de publicación: <%= @book.publication_date %></div>
-<div>Precio: <%= @book.price %></div>
+<div class="book-page">
+  <div class="container">
+    <%= link_to "&larr; Volver".html_safe, books_path, class: "btn btn-link" %>
+
+    <header class="main">
+      <h2><%= @book.title %></h2>
+      <div class="author"><%= @book.author %></div>
+    </header>
+
+    <div class="book d-flex flex-sm-row align-items-center align-items-sm-start">
+      <img src="<%= @book.image_url %>" alt="<%= @book.title %>">
+      <div class="book-details">
+        <p><%= @book.description %></p>
+        <dl>
+          <dt>Fecha de publicación</dt>
+          <dd><%= @book.publication_date %></dd>
+          <dt>Precio</dt>
+          <dd><%= @book.price %></dd>
+        </dl>
+        <div class="text-right">
+          <% if signed_in? %>
+            <%= link_to "Editar", edit_book_path(@book), class: "btn btn-link" %>
+            <%= link_to "Eliminar", @book, class: "btn btn-link text-danger", method: :delete, data: { confirm: "¿Estás seguro de eliminar este libro?" } %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
