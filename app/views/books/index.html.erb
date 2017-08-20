@@ -17,8 +17,10 @@
         <td><%= book.publication_date %></td>
         <td>
           <%= link_to "Mostrar", book %>
-          <%= link_to "Editar", edit_book_path(book) %>
-          <%= link_to "Eliminar", book, method: :delete, data: { confirm: "¿Estás seguro de eliminar este libro?" } %>
+          <% if signed_in? %>
+            <%= link_to "Editar", edit_book_path(book) %>
+            <%= link_to "Eliminar", book, method: :delete, data: { confirm: "¿Estás seguro de eliminar este libro?" } %>
+          <% end %>
         </td>
       </tr>
     <% end %>
