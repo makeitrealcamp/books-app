@@ -1,0 +1,31 @@
+<h1>Editar Libro</h1>
+<%= form_for @book do |f| %>
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+  <div>
+    <%= f.label :author %>
+    <%= f.text_field :author %>
+  </div>
+  <div>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+  <div>
+    <%= f.label :image_url %>
+    <%= f.text_field :image_url %>
+  </div>
+  <div>
+    <%= f.label :publication_date %>
+    <%= f.date_field :publication_date %>
+  </div>
+  <div>
+    <%= f.label :price %>
+    <%= f.number_field :price, step: :any %>
+  </div>
+
+  <div>
+    <%= f.submit %>
+  </div>
+<% end %>
