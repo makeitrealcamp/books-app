@@ -1,0 +1,39 @@
+<div class="card comments mt-5 mb-5">
+  <div class="card-header border-bottom-0 font-weight-bold bg-transparent">Comentarios</div>
+  <ul class="list-group list-group-flush">
+    <% @book.comments.each do |comment| %>
+      <li class="list-group-item">
+        <header class="comment-header"><strong><%= comment.user.email %></strong> wrote <%= distance_of_time_in_words(Time.current, comment.created_at) %> ago</header>
+        <div class="comment-body"><%= comment.body %></div>
+      </li>
+    <% end %>
+
+    <% if @book.comments.empty? %>
+      <li class="list-group-item text-center">Aún no hay comentarios para este libro :(</li>
+    <% end %>
+  </ul>
+</div>
+
+<% if signed_in? %>
+  <div class="card bg-light new-comment">
+    <div class="card-body">
+      <p class="font-weight-bold">Deja tu comentario:</p>
+      <%= form_for @book.comments.build do |f| %>
+        <%= f.hidden_field :book_id, value: @book.id %>
+        <div class="form-group">
+          <%= f.text_area :body, rows: 4, class: "form-control" %>
+        </div>
+
+        <div class="text-right">
+          <%= f.submit "Comentar", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% else %>
+  <div class="card bg-light mt-5">
+    <div class="card-body">
+      <p class="card-text text-center lead"><%= link_to "Regístrate", new_user_registration_path %> o <%= link_to "Ingresa", new_user_session_path %> para comentar</p>
+    </div>
+  </div>
+<% end %>

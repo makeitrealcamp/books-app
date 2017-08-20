@@ -23,6 +23,8 @@
             <%= link_to "Eliminar", @book, class: "btn btn-link text-danger", method: :delete, data: { confirm: "¿Estás seguro de eliminar este libro?" } %>
           <% end %>
         </div>
+
+        <%= render "comments" %>
       </div>
     </div>
   </div>
